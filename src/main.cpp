@@ -1772,13 +1772,13 @@ public:
 
     if (fout < 3500000)
     {
-
+      //cli();
       // oe(0b00000000);  // output disable CLK0, CLK1? for audio clicks remove
       ms(MSNA, fvcoa, fxtal);
       ms(MSNB, fvcoa, fxtal);
 
-      if (!belowFlag)
-      {
+     //if (!belowFlag)
+     //
         #define F_DEV 4
         ms(MS0, fvcoa, (fout + F_DEV), PLLA, 0, 0, rdiv);
         ms(MS1, fvcoa, (fout + F_DEV), PLLA, 0, 0, rdiv);
@@ -1800,8 +1800,9 @@ public:
           delayMicroseconds(F_MCU / 16000000 * 1000000UL / F_DEV / 360 * q); // Td = 1/(4 * Fdev) phase-shift   https://tj-lab.org/2020/08/27/si5351%e5%8d%98%e4%bd%93%e3%81%a73mhz%e4%bb%a5%e4%b8%8b%e3%81%ae%e7%9b%b4%e4%ba%a4%e4%bf%a1%e5%8f%b7%e3%82%92%e5%87%ba%e5%8a%9b%e3%81%99%e3%82%8b/
           ms(MS0, fvcoa, fout, PLLA, 0, 0, rdiv);
         }
-      }
+      //
       belowFlag = true;
+      //sei();
       oe(0b00000011); // output enable CLK0, CLK1
     }
     else
